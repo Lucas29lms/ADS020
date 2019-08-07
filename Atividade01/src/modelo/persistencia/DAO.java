@@ -10,7 +10,7 @@ public interface DAO<T> {
 
     void alterar(T entidade) throws DadosException;
 
-    void excluir(T entidade) throws DadosException;
+    void excluir(int id) throws DadosException;
 
     T consultar(int id) throws DadosException;
 }

@@ -66,13 +66,13 @@ public class AlunoDAO implements DAO<Aluno> {
     }
 
     @Override
-    public void excluir(Aluno entidade) throws DadosException {
+    public void excluir(int id) throws DadosException {
 
         try {
             String sql = "DELETE FORM ALUNOS WHERE ID=?";
             Connection conexao = ConexaoBD.getConexao();
             PreparedStatement comando = conexao.prepareStatement(sql);
-            comando.setInt(1, entidade.getId());
+            comando.setInt(1,id);
             comando.executeUpdate();
         } catch (SQLException ex) {
             throw new DadosException("Erro ao excluir aluno!");

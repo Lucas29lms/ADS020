@@ -14,7 +14,7 @@ public interface BO<T> {
 
     void excluir(T entidade) throws NegocioException;
 
-    T consultar(int id) throws NegocioException;
+    T consultar(T entidade) throws NegocioException;
 
     
 }

@@ -1,39 +1,98 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Aluno;
+import modelo.persistencia.AlunoDAO;
+import modelo.persistencia.DadosException;
 
 public class AlunoBO implements BO<Aluno> {
 
     @Override
-    public void validar(Aluno entidade) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void validar(Aluno aluno) throws NegocioException {
+
+        if (aluno.getMatricula() == 0) {
+            throw new NegocioException("Campo obrigatório MATRÍCULA não informado!");
+        }
+
+        if (aluno.getNome().isEmpty()) {
+            throw new NegocioException("Campo obrigatório NOME não informado!");
+        }
     }
 
     @Override
     public List<Aluno> listar() throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Aluno> lista = new ArrayList<Aluno>();
+
+        AlunoDAO dao = new AlunoDAO();
+
+        try {
+            lista = dao.listar();
+            if (lista.isEmpty()) {
+                throw new NegocioException("Nenhum aluno cadastrado!");
+            }
+        } catch (DadosException ex) {
+            throw new NegocioException("Ocorreu um erro", ex);
+        }
+
+        return lista;
     }
 
     @Override
     public void incluir(Aluno entidade) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        validar(entidade);
+
+        AlunoDAO dao = new AlunoDAO();
+
+        try {
+            dao.incluir(entidade);
+        } catch (DadosException ex) {
+            throw new NegocioException("Ocorreu um erro", ex);
+        }
     }
 
     @Override
     public void alterar(Aluno entidade) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        consultar(entidade);
+        validar(entidade);
+        AlunoDAO dao = new AlunoDAO();
+
+        try {
+            dao.alterar(entidade);
+        } catch (DadosException ex) {
+            throw new NegocioException("Ocorreu um erro", ex);
+        }
     }
 
     @Override
     public void excluir(Aluno entidade) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        consultar(entidade);
+        AlunoDAO dao = new AlunoDAO();
+
+        try {
+            dao.excluir(entidade.getId());
+        } catch (DadosException ex) {
+            throw new NegocioException("Ocorreu um erro", ex);
+        }
     }
 
     @Override
-    public Aluno consultar(int id) throws NegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Aluno consultar(Aluno entidade) throws NegocioException {
+
+        Aluno aluno = new Aluno();
+        AlunoDAO dao = new AlunoDAO();
+
+        try {
+            aluno = dao.consultar(entidade.getId());
+            if (aluno.getId() == 0) {
+                throw new NegocioException("Aluno não encontrado!");
+            }
+        } catch (DadosException ex) {
+            throw new NegocioException("Ocorreu um erro", ex);
+        }
+        return aluno;
     }
 
-       
 }
