@@ -7,23 +7,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "OlaMundoServlet", urlPatterns = {"/OlaMundoServlet"})
-public class OlaMundoServlet extends HttpServlet {
+@WebServlet(name = "SessaoServlet", urlPatterns = {"/SessaoServlet"})
+public class SessaoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+
+            HttpSession session = request.getSession();
+            out.println("SESSION_ID=" + session.getId());
 
             String nome = request.getParameter("nome");
             if (nome != null && nome.isEmpty() == false) {
-                out.println("<h1>Olá " + nome + "!</h1>");
-            } else {
-                out.println("<h1>Olá Mundo!</h1>");
+                session.setAttribute("nome", nome);
             }
-            out.println("<a href=" + response.encodeURL(request.getContextPath() + "/index.html") + ">Voltar</a>");
+            
+            out.println("Nome salvo na sessão: " + session.getAttribute("nome"));
         }
     }
 
