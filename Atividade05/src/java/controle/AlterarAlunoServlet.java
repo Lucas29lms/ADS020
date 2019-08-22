@@ -32,22 +32,7 @@ public class AlterarAlunoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AlterarAlunoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AlterarAlunoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,15 +47,41 @@ public class AlterarAlunoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Aluno aluno = new Aluno();
-        
+
         int id = Integer.parseInt(request.getParameter("id"));
         aluno.setId(id);
         AlunoBO bo = new AlunoBO();
-        
+
         try {
             bo.consultar(aluno);
         } catch (NegocioException e) {
             throw new ServletException("", e);
+        }
+
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Cadastro de Alunos</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Alterar Aluno</h1>");
+            out.println("<td><a href='" + response.encodeURL("/Atividade05/aluno/alterar?id=") + aluno.getId() + "'>Alterar</a>");
+            out.println("<form action=\"/aluno/alterar\" method=\"post\">");
+            out.println("<input type=\"hidden\" name=\"id\" value=\"\">");
+            out.println("<div>");
+            out.println("<label>Matrícula:</label>");
+            out.println("<input type=\"text\" name=\"matricula\" size=\"15\">");
+            out.println("</div>");
+            out.println("<div>");
+            out.println("<label>Nome:</label>");
+            out.println("<input type=\"text\" name=\"nome\" size=\"30\">");
+            out.println("</div>");
+            out.println("<input type=\"submit\" value=\"Salvar\"/>");
+            out.println("<a href=\"/aluno/listar\">Desistir</a>");
+            out.println("</form>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -85,7 +96,22 @@ public class AlterarAlunoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        Aluno aluno = new Aluno();
+
+        aluno.setId(Integer.parseInt(request.getParameter("id")));
+        aluno.setMatricula(Integer.parseInt(request.getParameter("matricula")));
+        aluno.setNome(request.getParameter("nome"));
+
+        AlunoBO bo = new AlunoBO();
+
+        try {
+            bo.alterar(aluno);
+        } catch (NegocioException e) {
+            throw new ServletException("", e);
+        }
+        response.sendRedirect(request.getContextPath()+"/aluno");
+
     }
 
     /**
