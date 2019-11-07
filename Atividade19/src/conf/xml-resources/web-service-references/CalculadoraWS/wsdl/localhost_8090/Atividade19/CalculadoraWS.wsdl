@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CalculadoraWS" targetNamespace="http://ws/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws/" elementFormDefault="unqualified" targetNamespace="http://ws/" version="1.0">
+
+  <xs:element name="dividirInteiros" type="tns:dividirInteiros"/>
+
+  <xs:element name="dividirInteirosResponse" type="tns:dividirInteirosResponse"/>
+
+  <xs:element name="hello" type="tns:hello"/>
+
+  <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+  <xs:element name="multiplicarInteiros" type="tns:multiplicarInteiros"/>
+
+  <xs:element name="multiplicarInteirosResponse" type="tns:multiplicarInteirosResponse"/>
+
+  <xs:element name="somarInteiros" type="tns:somarInteiros"/>
+
+  <xs:element name="somarInteirosResponse" type="tns:somarInteirosResponse"/>
+
+  <xs:element name="subtrairInteiros" type="tns:subtrairInteiros"/>
+
+  <xs:element name="subtrairInteirosResponse" type="tns:subtrairInteirosResponse"/>
+
+  <xs:complexType name="subtrairInteiros">
+    <xs:sequence>
+      <xs:element name="operadorA" type="xs:int"/>
+      <xs:element name="operadorB" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subtrairInteirosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="multiplicarInteiros">
+    <xs:sequence>
+      <xs:element name="operadorA" type="xs:int"/>
+      <xs:element name="operadorB" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="multiplicarInteirosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dividirInteiros">
+    <xs:sequence>
+      <xs:element name="operadorA" type="xs:int"/>
+      <xs:element name="operadorB" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="dividirInteirosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="helloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="somarInteiros">
+    <xs:sequence>
+      <xs:element name="operadorA" type="xs:int"/>
+      <xs:element name="operadorB" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="somarInteirosResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="somarInteirosResponse">
+    <wsdl:part element="tns:somarInteirosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="somarInteiros">
+    <wsdl:part element="tns:somarInteiros" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="subtrairInteirosResponse">
+    <wsdl:part element="tns:subtrairInteirosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloResponse">
+    <wsdl:part element="tns:helloResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="subtrairInteiros">
+    <wsdl:part element="tns:subtrairInteiros" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="dividirInteirosResponse">
+    <wsdl:part element="tns:dividirInteirosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="multiplicarInteiros">
+    <wsdl:part element="tns:multiplicarInteiros" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="dividirInteiros">
+    <wsdl:part element="tns:dividirInteiros" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="hello">
+    <wsdl:part element="tns:hello" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="multiplicarInteirosResponse">
+    <wsdl:part element="tns:multiplicarInteirosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CalculadoraWS">
+    <wsdl:operation name="subtrairInteiros">
+      <wsdl:input message="tns:subtrairInteiros" name="subtrairInteiros">
+    </wsdl:input>
+      <wsdl:output message="tns:subtrairInteirosResponse" name="subtrairInteirosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multiplicarInteiros">
+      <wsdl:input message="tns:multiplicarInteiros" name="multiplicarInteiros">
+    </wsdl:input>
+      <wsdl:output message="tns:multiplicarInteirosResponse" name="multiplicarInteirosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dividirInteiros">
+      <wsdl:input message="tns:dividirInteiros" name="dividirInteiros">
+    </wsdl:input>
+      <wsdl:output message="tns:dividirInteirosResponse" name="dividirInteirosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <wsdl:input message="tns:hello" name="hello">
+    </wsdl:input>
+      <wsdl:output message="tns:helloResponse" name="helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="somarInteiros">
+      <wsdl:input message="tns:somarInteiros" name="somarInteiros">
+    </wsdl:input>
+      <wsdl:output message="tns:somarInteirosResponse" name="somarInteirosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculadoraWSSoapBinding" type="tns:CalculadoraWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="subtrairInteiros">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="subtrairInteiros">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="subtrairInteirosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multiplicarInteiros">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="multiplicarInteiros">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="multiplicarInteirosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dividirInteiros">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="dividirInteiros">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="dividirInteirosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="hello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="somarInteiros">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="somarInteiros">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="somarInteirosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculadoraWS">
+    <wsdl:port binding="tns:CalculadoraWSSoapBinding" name="CalculadoraWSPort">
+      <soap:address location="http://localhost:8090/Atividade19/CalculadoraWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
